@@ -76,6 +76,7 @@ impl Operator {
         associativity: Associativity::Left,
         arity: 0,
     };
+
     pub fn from_token(t: Option<&Token>) -> Option<Operator> {
         if let None = t {
             return None;
@@ -176,7 +177,11 @@ pub fn parse(tokens: Vec<Token>) -> Expr {
                 }
                 last_token_type = Some("val");
             }
-            Token::Let => if let Some(Token::Eq) = tokens.next() {},
+            Token::Let => if let Some(Token::Identifier(i)) = tokens.next() {
+                if let Some(Token::Eq) = tokens.next() {
+                    
+                }
+            },
             _ => {}
         }
     }
