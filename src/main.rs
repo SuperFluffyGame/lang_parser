@@ -1,5 +1,5 @@
 fn main() {
-    let s = "";
+    let s = "2 + 3 * 3";
 
     let tokens = math::lexer::tokenize(s);
 

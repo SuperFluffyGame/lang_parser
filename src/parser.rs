@@ -179,7 +179,7 @@ pub fn parse(tokens: Vec<Token>) -> Expr {
                 }
                 last_token_type = Some("val");
             }
-           
+            
             _ => {}
         }
     }
@@ -202,34 +202,4 @@ pub fn parse(tokens: Vec<Token>) -> Expr {
 
 pub enum ParseError<'a> {
     ExpectedButGot(Token, Option<&'a Token>)
-}
-
-pub type IResult<I, O, E> = Result<(I, O), E>;
-
-pub fn parse_let<'a>(input: Vec<Token>) -> IResult<Vec<Token>, Expr, ParseError<'a>> {
-    let mut iter = input.iter();
-
-    let first = iter.next();
-    if let Some(t) = first {
-        let second = iter.next();
-        if let Some(Token::Identifier(i)) = second {
-            let third = iter.next();
-            if let Some(Token::Eq) = third {
-                let (rest, expr) = parse_expr(input)?;
-
-                return Ok((rest, expr))
-
-            } else {
-                return Err(ParseError::ExpectedButGot(Token::Eq, third))
-            }
-        } else {
-            return Err(ParseError::ExpectedButGot(Token::Identifier(String::new()), second))
-        }
-    } else {
-        return Err(ParseError::ExpectedButGot(Token::Let, first))
-    }
-}
-
-pub fn parse_expr<'a>(tokens: Vec<Token>) -> IResult<Vec<Token>, Expr, ParseError<'a>> {
-    todo!()
 }
