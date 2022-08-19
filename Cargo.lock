@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "real_math_parser"
+name = "math"
 version = "0.1.0"
