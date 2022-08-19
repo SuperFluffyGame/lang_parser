@@ -10,6 +10,7 @@ pub enum Expr {
     Div(Box<Expr>, Box<Expr>),
     Exp(Box<Expr>, Box<Expr>),
     Neg(Box<Expr>),
+    Let(String, Box<Expr>),
 }
 impl Expr {
     fn from_op(o: Operator, lhs: Expr, rhs: Option<Expr>) -> Option<Expr> {
@@ -103,9 +104,9 @@ pub fn parse(tokens: Vec<Token>) -> Expr {
 
     let mut last_token_type: Option<&str> = None;
 
-    let tokens = tokens.iter().peekable();
+    let mut tokens = tokens.iter().peekable();
 
-    for t in tokens {
+    'outer: while let Some(t) = tokens.next() {
         match t {
             Token::Number(n) => {
                 expr_stack.push(Expr::Number(*n));
@@ -175,6 +176,8 @@ pub fn parse(tokens: Vec<Token>) -> Expr {
                 }
                 last_token_type = Some("val");
             }
+            Token::Let => if let Some(Token::Eq) = tokens.next() {},
+            _ => {}
         }
     }
 
