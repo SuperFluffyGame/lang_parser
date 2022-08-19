@@ -11,6 +11,10 @@ pub enum Token {
     Slash,
     LParen,
     RParen,
+    LBracket,
+    RBraket,
+    LBrace,
+    RBrace,
 
     String(String),
 

@@ -1,5 +1,5 @@
 fn main() {
-    let s = "let a = 1";
+    let s = "";
 
     let tokens = math::lexer::tokenize(s);
 
